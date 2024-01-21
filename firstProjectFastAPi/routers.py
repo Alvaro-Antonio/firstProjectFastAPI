@@ -23,7 +23,10 @@ def converter(from_currency: str, to_currencies: str, price: float):
     return result
 
 @router.get('/async/{from_currency}')
-async def async_converter(from_currency: str, to_currencies: str, price: float):
+async def async_converter(
+    from_currency: str = Path(max_length=3, regex='^[A-Z]{3}$'),
+    to_currencies: str,
+    price: float):
     to_currencies= to_currencies.split(',')
 
     coroutines = []
